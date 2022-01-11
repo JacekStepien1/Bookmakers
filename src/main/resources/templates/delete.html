@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Szablon</title>
+
+<link rel="stylesheet" href="/css/style.css" />
+
+</head>
+
+<body>
+
+	<div id="wrapper">
+		<div id="logo">
+			<a href="#"> </a>
+		</div>
+		<div id="menu">
+			<ul>
+				<li><a href="#">Strona główna</a></li>
+				<li><a href="#">O mnie</a></li>
+				<li><a href="#">Oferta</a></li>
+				<li><a href="#">Kontakt</a></li>
+			</ul>
+		</div>
+		<div id="header">
+			<div id="title_head">Matches</div>
+		</div>
+		
+		<div id="container">
+			<div id="content">
+				<h2>22Buk Matches Goal Score</h2>
+				<b th:text="${leagueName}"></b>
+				
+				
+				<table class="grid-container" th:each="m, iterStat : ${matches}">
+					<caption>. . .</caption>
+					
+
+
+					<tfoot>
+						<tr>
+							<td colspan="7">So: <a
+								href="http://en.wikipedia.org/wiki/List_of_highest-grossing_animated_films"
+								rel="external">Wikipedia</a> &amp; 
+								<a href="http://www.boxofficemojo.com/genres/chart/?id=animation.htm"
+								
+								rel="external">Box Office Mojo</a>. Data is current ...123456677777>
+								
+								<a th:href="@{'/mdetails/'}">aaaa</a>
+							</td>
+						</tr>
+					</tfoot>
+
+
+					<tbody>
+									
+						<thead class="a1">
+						<tr>
+							<th colspan="6" scope="col"
+								th:utext="${m.home} + ' - ' + ${m.away} + ' - ' + ${#dates.format(m.dateTime, 'dd.MM.yyyy HH:mm') + 'aa2aa'}"></th>				
+						</tr>
+					</thead>
+					
+					<th>buk</th>
+					<th>1</th>
+					<th>X</th>
+					<th>2</th>
+					<th>reading time</th>
+					<th>odds history</th>	
+					
+					
+				
+
+						
+			
+				
+				
+				<!--  
+				
+ 					<tr th:each="bukList, bukStat : ${bukList}">
+					<td th:text="${bukList}"></td>
+					
+					<td th:if="${m.odds.get(bukStat.index).home} == ${highestOdds.get(iterStat.index).home}" th:style="'font-weight: bold; font-size: 17px; border: 2px solid red;'" th:text="${m.odds.get(bukStat.index).home}"></td>	
+					<td th:if="${m.odds.get(bukStat.index).home} != ${highestOdds.get(iterStat.index).home}" th:text="( (${m.odds.get(bukStat.index).home} != 0.00)? ${m.odds.get(bukStat.index).home} : '')"></td>
+					
+					<td class="highestOdds" th:if="${m.odds.get(bukStat.index).draw} == ${highestOdds.get(iterStat.index).draw}" th:text="${m.odds.get(bukStat.index).draw}"></td>	
+					<td th:if="${m.odds.get(bukStat.index).draw} != ${highestOdds.get(iterStat.index).draw}" th:text="( (${m.odds.get(bukStat.index).draw} != 0.00)? ${m.odds.get(bukStat.index).draw} : '')"></td>
+					
+					<td class="highestOdds" th:if="${m.odds.get(bukStat.index).away} == ${highestOdds.get(iterStat.index).away}" th:text="${m.odds.get(bukStat.index).away}"></td>	
+					<td th:if="${m.odds.get(bukStat.index).away} != ${highestOdds.get(iterStat.index).away}" th:text="( (${m.odds.get(bukStat.index).away} != 0.00)? ${m.odds.get(bukStat.index).away} : '')"></td>
+					
+					<td th:utext="( (${m.odds.get(bukStat.index).dateTime} != null)? ${#dates.format(m.odds.get(bukStat.index).dateTime, 'dd.MM.yyyy' )} + '&lt;br /&gt; ' + ${#dates.format(m.odds.get(bukStat.index).dateTime,'HH:mm' )} : ' ')"></td>
+					
+					<td><a th:href="@{'/matchdetails/' + ${m.id}}">check</a></td>
+					
+					</tr>	
+							-->
+					</tbody>
+					
+				</table>
+
+
+
+			</div>
+			
+			<div id="sidebar">
+				<h2>O nas</h2>
+				<p>Bla bla bla bla bla.... 22222213</p>
+				<h2>Choose a league</h2>
+
+
+
+				<li th:each="country : ${country}"><a
+					th:href="@{'/index/'+${country.getCountry()}}"><font
+						th:text="${country.getLeagueName()}"></font></a> <br></br></li>
+
+
+			</div>
+		</div>
+		<div id="footer">
+			<!--       <p>&copy Wszelkie prawa zastrzeżone. <br /> Projekt: <a href="http://www.templatki.net">Darmowe Szablony Stron</a></p> -->
+		</div>
+	</div>
+</body>
+</html>

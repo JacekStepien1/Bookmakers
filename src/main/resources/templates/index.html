@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="description" content="Najnowsze kursy polskich bukmacherów! Top 12 europejskich lig piłki nożnej. The latest odds of Polish bookmakers! Top 12 European Football Leagues."/>
+    <meta name="keywords" content="bukmacherzy, kursy, bukacherskie, polscy, promocje, typy, najnowsi, najlepsze, 2022, 2023, pilka nozna, polska, obstawianie, najlepsze, bookmakers, polish, betting, tips, odds, best, promotion, 2022, 2023"/>
+    <meta name="author" content="Jacek Stepien"/>
+    <title>Top 12 European Football Leagues</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400"/>  	<!-- Google web font "Open Sans" -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>                                    	<!-- Bootstrap style -->
+    <link rel="stylesheet" href="/css/magnific-popup.css"/>                             		<!-- Magnific pop up style, http://dimsemenov.com/plugins/magnific-popup/ -->
+    <link rel="stylesheet" href="/css/templatemo-style.css"/>                                 	<!-- Templatemo style -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+    <body>        
+        <div class="container">
+            <div class="row">
+                <div class="tm-left-right-container">                       
+<!-- Left column: logo and menu -->
+                    <div class="tm-blue-bg tm-left-column">                        
+                        <div class="tm-logo-div text-xs-center">
+                            <img src="/img/ball.jpg" alt="Logo"/>
+                            <h1 class="tm-site-name">Top 12 European Football Leagues:</h1>
+                        </div>              
+<!--   Country & League & Left Side   -->      
+						<a class="league" th:each="country, z : ${country}" id="menu"  th:href="@{'/index/'+${country.getCountry()}}" th:utext="${country.getLeagueName()}+ '&lt;br /&gt;'"></a>
+<!--   League Name Between Country and Matches   -->  			
+						<nav class="tm-main-nav">
+                            	<li class="tm-nav-item"> <a href="#match0" class="tm-nav-item-link" th:text="${leagueName}"></a></li>     
+						</nav>                          	
+<!--   Matches (Left Side) -->
+						<nav class="tm-main-nav">
+                            <ul class="tm-main-nav-ul">
+                            	<li id="matches" th:each="m, iterStat : ${matches}"> 
+                                    <a th:href="@{'#'+'match'+${iterStat.index}}" style="font-size: 11px;" th:utext="${#dates.format(m.dateTime,'dd.MM HH:mm' )}  + ' - '"></a>
+                                    <a th:href="@{'#'+'match'+${iterStat.index}}" th:utext="${m.home}  +' - '+ ${m.away}"></a>
+ 								</li>
+                            </ul>
+                        </nav>                                         
+                    </div>
+<!-- Right column: content -->
+                    <div class="tm-right-column">
+                    <section th:id="'match0'" class="tm-section">
+                        <figure>
+                            <img src="/img/boisko2.png" alt="Header image" class="img-fluid"/>    
+                        </figure>
+					</section>   					
+<!--  League Name -->
+					<div class="tm-content-div">
+                    	<header>
+							<h2 class="tm-blue-text tm-welcome-title2 top" th:text="${leagueName}"></h2><br></br>  
+						</header>          
+<!--  Table Start-->   
+           				<table class="grid-container" th:each="m, iterStat : ${matches}">
+           				<a th:if="${iterStat.index} != 0"><br></br></a>
+							<tbody>
+<!-- Section Of Each Table -->
+								<tr th:each="m, iterStat : ${matches}"></tr>
+								<section class="tm-section" th:id="'match'+${iterStat.index}">						
+<!-- Match Over The Table -->		                   
+                                	<header>
+                                    	<h2 class="tm-blue-text tm-welcome-title tm-margin-b-15" th:utext="  ${m.home} + ' - ' + ${m.away}"></h2> 
+                                	</header>                   
+                     			</section>		 
+<!-- Table Head - Match + Date -->
+								<thead>
+									<tr>
+										<td colspan="6" scope="col" style="height:50px; font-size: 18px; font-weight: 500; color: white; border-right: 3px solid rgba(29,150,178,1);" th:utext="${m.home} + ' - ' + ${m.away} + ' - ' + ${leagueName} + '&lt;br /&gt;' +  ${#dates.format(m.dateTime, 'dd.MM.YYYY')}  + ' - ' +  ${#dates.format(m.dateTime, 'HH:mm')}"></td>
+									</tr>
+								</thead>						
+<!-- Table Head 1 X 2 -->
+								<th>Bookmakers</th>
+								<th>1</th>
+								<th>X</th>
+								<th>2</th>
+								<th>reading time</th>
+								<th>odds history</th>															
+<!-- Table Cells -->							
+								<tr th:each="bukList, bukStat : ${bukList}">
+									<td><a id="one" target="_blank" th:href="@{${bukLinks.get(bukStat.index)}}" th:text="${bukList}"></a></td>
+									<td class="highestOdds" th:if="${m.odds.get(bukStat.index).home} == ${highestOdds.get(iterStat.index).home}" th:text="${m.odds.get(bukStat.index).home}"></td>
+									<td th:if="${m.odds.get(bukStat.index).home} != ${highestOdds.get(iterStat.index).home}" th:text="( (${m.odds.get(bukStat.index).home} != 0.00)? ${m.odds.get(bukStat.index).home} : '-')"></td>
+									<td	class="highestOdds"	th:if="${m.odds.get(bukStat.index).draw} == ${highestOdds.get(iterStat.index).draw}" th:text="${m.odds.get(bukStat.index).draw}"></td>
+									<td	th:if="${m.odds.get(bukStat.index).draw} != ${highestOdds.get(iterStat.index).draw}" th:text="( (${m.odds.get(bukStat.index).draw} != 0.00)? ${m.odds.get(bukStat.index).draw} : '-')"></td>
+									<td class="highestOdds"	th:if="${m.odds.get(bukStat.index).away} == ${highestOdds.get(iterStat.index).away}" th:text="${m.odds.get(bukStat.index).away}"></td>
+									<td	th:if="${m.odds.get(bukStat.index).away} != ${highestOdds.get(iterStat.index).away}" th:text="( (${m.odds.get(bukStat.index).away} != 0.00)? ${m.odds.get(bukStat.index).away} : '-')"></td>
+									<td    th:utext="( (${m.odds.get(bukStat.index).dateTime} != null)? ${#dates.format(m.odds.get(bukStat.index).dateTime, 'dd.MM' )} + ' - ' + ${#dates.format(m.odds.get(bukStat.index).dateTime, 'HH:mm' )} + '&lt;br /&gt; '  : ' ')"></td>
+									<td th:if="${m.odds.get(bukStat.index).away} != 0.00" id="check"> <a id="check" th:href="@{'/matchdetails/' + ${m.id} + '/' +  ${bukList}}">check</a></td>
+									<td th:if="${m.odds.get(bukStat.index).away} == 0.00" id="check"> <a></a></td>	
+								</tr>										
+							</tbody>									
+<!--  Table Foot -->
+							<tfoot>
+								<tr>
+									<td colspan="6" style="border: 3px solid rgba(29,150,178,1); border-top: 1px solid rgba(29,150,178,1);" th:utext="' The best odds for now are' + '&nbsp;&nbsp;' + ${highestOdds.get(iterStat.index).home}+ '&nbsp;&nbsp;' +
+											${highestOdds.get(iterStat.index).draw}+ '&nbsp;&nbsp;' +
+											${highestOdds.get(iterStat.index).away}+ '&nbsp;&nbsp;'" >
+									</td>
+								</tr>	
+							</tfoot>
+<!--  Right side panel, script, score -->
+                            <div class="tm-right-out">
+                                <div class="char">
+                                    <p th:id="${iterStat.index}"></p>
+                                </div>
+                                <div class="last5">
+                                    <p th:text="'Last 5 matches:'"></p>
+                                    <p style="font-weight: 700;" th:text="${m.home}+':'"></p>
+                                </div>
+                                <div class="last6">
+                                    <p th:each="lmaa, aaa : ${lm[iterStat.index]}">
+                                        <span th:text="( (${lmaa.dateTime} != null)? ${#dates.format(lmaa.dateTime, 'dd.MM')} + ' - ' : ' ')" style="font-size: 12px;"></span>
+                                        <span th:if="${lmaa.scoreHome > lmaa.scoreAway} " style="color: green; font-weight: 500;" th:text="${lmaa.home} + ' ' " ></span>
+                                        <span th:if="${lmaa.scoreHome > lmaa.scoreAway}" th:text=" ' ' + ${lmaa.scoreHome} + '-' + ${lmaa.scoreAway} + ' ' " ></span>
+                                        <span th:if="${lmaa.scoreHome > lmaa.scoreAway}" style="font-weight: 300;" th:text="${lmaa.away}" ></span>
+                                        <span th:if="${lmaa.scoreHome == lmaa.scoreAway } AND ${lmaa.scoreHome!=null}" style="font-weight:300;" th:text="${lmaa.home} + ' ' " ></span>
+                                        <span th:if="${lmaa.scoreHome == lmaa.scoreAway} AND ${lmaa.scoreHome!=null}" th:text="${lmaa.scoreHome} + '-' + ${lmaa.scoreAway} + ' ' "></span>
+                                        <span th:if="${lmaa.scoreHome == lmaa.scoreAway} AND ${lmaa.scoreHome!=null}" style="font-weight: 300;" th:text="${lmaa.away}" ></span>
+                                        <span th:if="${lmaa.scoreAway > lmaa.scoreHome}" style="font-weight: 300; " th:text="${lmaa.home}"></span>
+                                        <span th:if="${lmaa.scoreAway > lmaa.scoreHome}" th:text=" ' ' + ${lmaa.scoreHome} + '-' + ${lmaa.scoreAway} + ' ' " ></span>
+                                        <span th:if="${lmaa.scoreAway > lmaa.scoreHome}" style="color: green; font-weight: 500; " th:text="${lmaa.away}"></span>
+                                        <span th:utext="( (${aaa.index} == 4)?  '&lt;br /&gt;' + '&lt;br /&gt;' + '&lt;br /&gt;')"></span>
+                                        <span th:if="${aaa.index} == 4" style="font-weight: 700;" th:text="${m.away+':'}" ></span>
+                                </p>
+                                </div>
+                            </div>
+						</table>
+<!--  Bottom of Page -->						
+						<footer>
+                                <p class="tm-copyright-p">&copy; <span class="tm-current-year">2022</span> | Designed by Jacek Stępień. <span style="font-size:14px;">&nbsp;&nbsp;e-mail: jacek2233@gmail.com</span></p>
+						</footer>
+                    </div>  
+				</div>
+			</div>
+		</div> <!-- row -->
+	</div> <!-- container -->              
+<!-- load JS files -->
+        <script src="/js/jquery-1.11.3.min.js"></script>             <!-- jQuery (https://jquery.com/download/) -->
+        <script src="/js/jquery.magnific-popup.min.js"></script>     <!-- Magnific pop-up (http://dimsemenov.com/plugins/magnific-popup/) -->
+        <script src="/js/jquery.singlePageNav.min.js"></script>      <!-- Single Page Nav (https://github.com/ChrisWojcik/single-page-nav) -->
+        <script>     
+       
+            $(document).ready(function(){
+
+                // Single page nav
+                $('.tm-main-nav').singlePageNav({
+                    'currentClass' : "active",
+                    offset : 20
+                });
+
+                // Magnific pop up
+                $('.tm-gallery-1').magnificPopup({
+                  delegate: 'a', // child items selector, by clicking on it popup will open
+                  type: 'image',
+                  gallery: {enabled:true}
+                  // other options
+                }); 
+
+                $('.tm-gallery-2').magnificPopup({
+                  delegate: 'a', // child items selector, by clicking on it popup will open
+                  type: 'image',
+                  gallery: {enabled:true}
+                  // other options
+                }); 
+
+                $('.tm-gallery-3').magnificPopup({
+                  delegate: 'a', // child items selector, by clicking on it popup will open
+                  type: 'image',
+                  gallery: {enabled:true}
+                  // other options
+                }); 
+
+                $('.tm-current-year').text(new Date().getFullYear());                
+            });
+        </script>
+        <script th:inline="javascript">
+      		google.charts.load('current', {'packages':['corechart']});
+      		google.charts.setOnLoadCallback(drawChart);
+
+      		function drawChart() {
+
+        var data1 = google.visualization.arrayToDataTable([ ['', ''], ['1', [[${d[0][0]}]] ] , ['X', [[${d[0][1]}]]], ['2', [[${d[0][2]}]]], ]);
+        var data2 = google.visualization.arrayToDataTable([ ['', ''], ['1', [[${d[1][0]}]] ] , ['X', [[${d[1][1]}]]], ['2', [[${d[1][2]}]]], ]);
+        var data3 = google.visualization.arrayToDataTable([ ['', ''], ['1', [[${d[2][0]}]] ] , ['X', [[${d[2][1]}]]], ['2', [[${d[2][2]}]]], ]);
+        var data4 = google.visualization.arrayToDataTable([ ['', ''], ['1', [[${d[3][0]}]] ] , ['X', [[${d[3][1]}]]], ['2', [[${d[3][2]}]]], ]);
+        var data5 = google.visualization.arrayToDataTable([ ['', ''], ['1', [[${d[4][0]}]] ] , ['X', [[${d[4][1]}]]], ['2', [[${d[4][2]}]]], ]);
+        var data6 = google.visualization.arrayToDataTable([ ['', ''], ['1', [[${d[5][0]}]] ] , ['X', [[${d[5][1]}]]], ['2', [[${d[5][2]}]]], ]);
+        var data7 = google.visualization.arrayToDataTable([ ['', ''], ['1', [[${d[6][0]}]] ] , ['X', [[${d[6][1]}]]], ['2', [[${d[6][2]}]]], ]);
+        var data8 = google.visualization.arrayToDataTable([ ['', ''], ['1', [[${d[7][0]}]] ] , ['X', [[${d[7][1]}]]], ['2', [[${d[7][2]}]]], ]);
+        var data9 = google.visualization.arrayToDataTable([ ['', ''], ['1', [[${d[8][0]}]] ] , ['X', [[${d[8][1]}]]], ['2', [[${d[8][2]}]]], ]);
+        var data10 = google.visualization.arrayToDataTable([ ['', ''], ['1', [[${d[9][0]}]] ] , ['X', [[${d[9][1]}]]], ['2', [[${d[9][2]}]]], ]);
+        
+        
+        var options = {
+          	title: 'percentage value',
+        	is3D: true,
+        	pieSliceText: 'label',
+        	fontSize: 13,
+        	backgroundColor: '#ffffff',
+            pieSliceText: 'label',
+        };
+
+        var chart1 = new google.visualization.PieChart(document.getElementById('0'));
+        chart1.draw(data1, options);
+        
+        var chart2 = new google.visualization.PieChart(document.getElementById('1'));
+        chart2.draw(data2, options);
+        
+        var chart3 = new google.visualization.PieChart(document.getElementById('2'));
+        chart3.draw(data3, options); 
+        
+        var chart4 = new google.visualization.PieChart(document.getElementById('3'));
+        chart4.draw(data4, options); 
+        
+        var chart5 = new google.visualization.PieChart(document.getElementById('4'));
+        chart5.draw(data5, options);
+        
+        var chart6 = new google.visualization.PieChart(document.getElementById('5'));
+        chart6.draw(data6, options);  
+        
+        var chart7 = new google.visualization.PieChart(document.getElementById('6'));
+        chart7.draw(data7, options);  
+        
+        var chart8 = new google.visualization.PieChart(document.getElementById('7'));
+        chart8.draw(data8, options);  
+        
+        var chart9 = new google.visualization.PieChart(document.getElementById('8'));
+        chart9.draw(data9, options);     
+        
+        var chart10 = new google.visualization.PieChart(document.getElementById('9'));
+        chart10.draw(data10, options);    
+      }
+    </script>  
+           
+	</body>
+</html>
