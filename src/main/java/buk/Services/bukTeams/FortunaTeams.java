@@ -46,9 +46,9 @@ public class FortunaTeams {
 	public TreeMap<Integer, String> portugalPrimeiraLiga() {
 		TreeMap<Integer, String> teams = new TreeMap<>();
 		int setId = teamGenerator.portugalPrimeiraLiga;
-		String teamList[] = new String [] {"Sporting L.", "FC Porto", "Benfica", "Braga", "Ferreira", "Guimaraes", "Moreirense",
-				"Maritimo", "Santa Clara", "Estoril", "Tondela", "Portimonense", "Famalicao", "Arouca", "Gil Vicente", "Vizela",
-				"Belenenses", "Boavista"};
+		String teamList[] = new String [] {"Sporting L.", "FC Porto", "SL Benfica", "SC Braga", "Pacos Ferreira", "Vitoria Guimarares", "Moreirense FC",
+				"Maritimo Madeira", "Santa Clara", "Estoril Praia", "CD Tondela", "Portimonense", "FC Famalicao", "FC Arouca", "Gil Vicente FC", "FC Vizela",
+				"Belenenses SAD", "Boavista FC"};
 		insertTeams(teamList, teams, setId);
 		return teams;
 	}
