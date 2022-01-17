@@ -12,54 +12,49 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Country {
-	
-	@Id
-	private Long id;
-	
-	private String country;
-	
-	private String leagueName;
-	
-	@OneToMany(mappedBy="country")
-	private List <Teams> teamsList;
-	
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Id
+    private Long id;
 
+    private String country;
 
-	public String getCountry() {
-		return country;
-	}
+    private String leagueName;
 
-	public void setCountry(String country) {
-		this.country = country;
-	}
+    @OneToMany(mappedBy = "country")
+    private List<Teams> teamsList;
 
-	public List<Teams> getTeamsList() {
-		return teamsList;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setTeamsList(List<Teams> teamsList) {
-		this.teamsList = teamsList;
-	}
-
-	public String getLeagueName() {
-		return leagueName;
-	}
-
-	public void setLeagueName(String leagueName) {
-		this.leagueName = leagueName;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 
-	
-	
-	
-	
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public List<Teams> getTeamsList() {
+        return teamsList;
+    }
+
+    public void setTeamsList(List<Teams> teamsList) {
+        this.teamsList = teamsList;
+    }
+
+    public String getLeagueName() {
+        return leagueName;
+    }
+
+    public void setLeagueName(String leagueName) {
+        this.leagueName = leagueName;
+    }
+
 
 }

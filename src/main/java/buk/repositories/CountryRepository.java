@@ -7,12 +7,6 @@ import buk.Entities.Country;
 import buk.Entities.Matches;
 
 public interface CountryRepository extends JpaRepository<Country, Long> {
-	
-	public Country findFirstByCountry(String country);
-	
 	@Query("SELECT c.leagueName from Country c WHERE c.country =?1")
 	String league (String league);
-
-	
-
 }

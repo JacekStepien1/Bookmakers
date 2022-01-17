@@ -19,21 +19,16 @@ public interface MatchesRepository extends JpaRepository<Matches, Long> {
 
 	public Matches findFirstByHomeAndAwayAndDateTimeBetweenAndScoreHome (String home, String away, Date date1, Date date2, Integer scores);
 
-	public List<Matches> findTop5ByDateTimeBeforeAndHomeOrDateTimeBeforeAndAwayOrderByDateTimeDesc(Date date, String home, Date date1, String away);
-
 	public List<Matches> findTop5ByDateTimeBeforeAndHomeAndScoreHomeNotNullOrDateTimeBeforeAndAwayAndScoreHomeNotNullOrderByDateTimeDesc(Date date, String home, Date date1, String away);
 
+	@Query("SELECT DISTINCT m FROM Matches m INNER JOIN m.teams z INNER JOIN z.country x WHERE x.country = ?1 AND m.dateTime >=?2 ORDER BY m.dateTime ASC")
+	List <Matches> distinctMatches (String leauge, Date dateTime);
 
 
 
-	@Query("SELECT DISTINCT m FROM Matches m INNER JOIN m.teams x WHERE x.country=?1")
-	Collection<Matches> findTrabzon(int liczba);
-	
-	public List<Matches> findByDateTimeBetween (Date data1, Date date2);
 
-	@Query("SELECT DISTINCT m FROM Matches m INNER JOIN m.teams t WHERE t.country=(SELECT z.id FROM Country z WHERE z.country=?1)")
-	List<Matches> selectMatches (String country);
-		
+
+
 //	@Query("SELECT m FROM Matches m INNER JOIN m.teams t WHERE t.country=(SELECT z.id FROM Country z WHERE z.country=?1)  ORDER BY m.dateTime ASC")
 //	List <Matches> match (String league);
 	
@@ -43,8 +38,7 @@ public interface MatchesRepository extends JpaRepository<Matches, Long> {
 //	@Query("SELECT m FROM Matches m INNER JOIN m.teams t WHERE t.country=3")
 //	List <Matches> match ();
 	
-	@Query("SELECT DISTINCT m FROM Matches m INNER JOIN m.teams z INNER JOIN z.country x WHERE x.country = ?1 AND m.dateTime >=?2 ORDER BY m.dateTime ASC")
-	List <Matches> distinctMatches (String leauge, Date dateTime);
+
 
 
 	

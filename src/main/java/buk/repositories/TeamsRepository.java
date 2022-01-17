@@ -9,9 +9,5 @@ import buk.Entities.Teams;
 
 @Repository
 public interface TeamsRepository extends JpaRepository<Teams, Long> {
-
-	
-//	public List<Turkey1league> findByTeamIgnoreCase(String team);
-	
 	
 }

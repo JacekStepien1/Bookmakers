@@ -13,49 +13,48 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Teams {
 
-	@Id
-	private long id;
+    @Id
+    private long id;
 
-	private String team;
-	
+    private String team;
+
     @ManyToOne
-	private Country country;
-	
-	@ManyToMany(mappedBy = "teams")
-	List<Matches> matches;
+    private Country country;
 
-	public long getId() {
-		return id;
-	}
+    @ManyToMany(mappedBy = "teams")
+    List<Matches> matches;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    public long getId() {
+        return id;
+    }
 
-	public String getTeam() {
-		return team;
-	}
+    public void setId(long id) {
+        this.id = id;
+    }
 
-	public void setTeam(String team) {
-		this.team = team;
-	}
+    public String getTeam() {
+        return team;
+    }
 
-	public Country getCountry() {
-		return country;
-	}
+    public void setTeam(String team) {
+        this.team = team;
+    }
 
-	public void setCountry(Country country) {
-		this.country = country;
-	}
+    public Country getCountry() {
+        return country;
+    }
 
-	public List<Matches> getMatches() {
-		return matches;
-	}
+    public void setCountry(Country country) {
+        this.country = country;
+    }
 
-	public void setMatches(List<Matches> matches) {
-		this.matches = matches;
-	}
-	
+    public List<Matches> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(List<Matches> matches) {
+        this.matches = matches;
+    }
 
 
 }

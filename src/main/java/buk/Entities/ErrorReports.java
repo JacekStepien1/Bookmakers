@@ -11,49 +11,48 @@ import javax.persistence.TemporalType;
 
 @Entity
 public class ErrorReports {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	private String buk;
-	private String error;
-	
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dateTime;
 
-	public Long getId() {
-		return id;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    private String buk;
+    private String error;
 
-	public String getBuk() {
-		return buk;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateTime;
 
-	public void setBuk(String buk) {
-		this.buk = buk;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getError() {
-		return error;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setError(String error) {
-		this.error = error;
-	}
+    public String getBuk() {
+        return buk;
+    }
 
-	public Date getDateTime() {
-		return dateTime;
-	}
+    public void setBuk(String buk) {
+        this.buk = buk;
+    }
 
-	public void setDateTime(Date dateTime) {
-		this.dateTime = dateTime;
-	}
-	
-	
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
+
+    public Date getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
+    }
+
 
 }

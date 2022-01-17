@@ -13,74 +13,74 @@ import javax.persistence.TemporalType;
 @Entity
 public class Odds {
 
-	@Id
-	@GeneratedValue
-	private Long id;
-	private double home;
-	private double draw;
-	private double away;
-	private String buk;
-	
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dateTime;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	private Matches match;
+    @Id
+    @GeneratedValue
+    private Long id;
+    private double home;
+    private double draw;
+    private double away;
+    private String buk;
 
-	public Long getId() {
-		return id;
-	}
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateTime;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Matches match;
 
-	public Date getDateTime() {
-		return dateTime;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setDateTime(Date dateTime) {
-		this.dateTime = dateTime;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public double getHome() {
-		return home;
-	}
+    public Date getDateTime() {
+        return dateTime;
+    }
 
-	public void setHome(double home) {
-		this.home = home;
-	}
+    public void setDateTime(Date dateTime) {
+        this.dateTime = dateTime;
+    }
 
-	public double getDraw() {
-		return draw;
-	}
+    public double getHome() {
+        return home;
+    }
 
-	public void setDraw(double draw) {
-		this.draw = draw;
-	}
+    public void setHome(double home) {
+        this.home = home;
+    }
 
-	public double getAway() {
-		return away;
-	}
+    public double getDraw() {
+        return draw;
+    }
 
-	public void setAway(double away) {
-		this.away = away;
-	}
+    public void setDraw(double draw) {
+        this.draw = draw;
+    }
 
-	public Matches getMatch() {
-		return match;
-	}
+    public double getAway() {
+        return away;
+    }
 
-	public void setMatch(Matches match) {
-		this.match = match;
-	}
-	
-	public String getBuk() {
-		return buk;
-	}
+    public void setAway(double away) {
+        this.away = away;
+    }
 
-	public void setBuk(String buk) {
-		this.buk = buk;
-	}
+    public Matches getMatch() {
+        return match;
+    }
+
+    public void setMatch(Matches match) {
+        this.match = match;
+    }
+
+    public String getBuk() {
+        return buk;
+    }
+
+    public void setBuk(String buk) {
+        this.buk = buk;
+    }
 
 }
