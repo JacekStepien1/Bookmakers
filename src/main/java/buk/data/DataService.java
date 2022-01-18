@@ -160,17 +160,17 @@ public class DataService {
 
     public Map<String, TreeMap> iForBet() {
         Map<String, TreeMap> links = new TreeMap<>();
-        links.put("https://www.iforbet.pl/oferta/8/29994", iForBetTeams.polandEkstraklasa());
-        links.put("https://www.iforbet.pl/oferta/8/29975", iForBetTeams.bundesLiga());
-        links.put("https://www.iforbet.pl/oferta/8/122", iForBetTeams.italySerieA());
-        links.put("https://www.iforbet.pl/oferta/8/199", iForBetTeams.englandPremier());
-        links.put("https://www.iforbet.pl/oferta/8/159", iForBetTeams.spainLaLiga());
-        links.put("https://www.iforbet.pl/oferta/8/29958", iForBetTeams.franceLigue1());
-        links.put("https://www.iforbet.pl/oferta/8/29968", iForBetTeams.netherlandsEredivisie());
-        links.put("https://www.iforbet.pl/oferta/8/555", iForBetTeams.portugalPrimeiraLiga());
-        links.put("https://www.iforbet.pl/oferta/8/29972", iForBetTeams.turkeySuperLig());
-        links.put("https://www.iforbet.pl/oferta/8/29897", iForBetTeams.russiaPremier());
-        links.put("https://www.iforbet.pl/oferta/8/29861", iForBetTeams.belgiumJupiter());
+        links.put("https://www.iforbet.pl/zaklady-bukmacherskie/320/29994", iForBetTeams.polandEkstraklasa());
+        links.put("https://www.iforbet.pl/zaklady-bukmacherskie/141/29975", iForBetTeams.bundesLiga());
+        links.put("https://www.iforbet.pl/zaklady-bukmacherskie/118/122", iForBetTeams.italySerieA());
+        links.put("https://www.iforbet.pl/zaklady-bukmacherskie/155/199", iForBetTeams.englandPremier());
+        links.put("https://www.iforbet.pl/zaklady-bukmacherskie/156/159", iForBetTeams.spainLaLiga());
+        links.put("https://www.iforbet.pl/zaklady-bukmacherskie/165/29958", iForBetTeams.franceLigue1());
+        links.put("https://www.iforbet.pl/zaklady-bukmacherskie/157/29968", iForBetTeams.netherlandsEredivisie());
+        links.put("https://www.iforbet.pl/zaklady-bukmacherskie/554/555", iForBetTeams.portugalPrimeiraLiga());
+        links.put("https://www.iforbet.pl/zaklady-bukmacherskie/119/29972", iForBetTeams.turkeySuperLig());
+        links.put("https://www.iforbet.pl/zaklady-bukmacherskie/116/29897", iForBetTeams.russiaPremier());
+        links.put("https://www.iforbet.pl/zaklady-bukmacherskie/365/29861", iForBetTeams.belgiumJupiter());
 
         return links;
     }
@@ -389,17 +389,17 @@ public class DataService {
         fortunaLinks.put("belgium", "https://www.efortuna.pl/zaklady-bukmacherskie/pilka-nozna/1-belgia");
 
 
-        iForBetLinks.put("Poland", "https://www.iforbet.pl/oferta/8/29994");
-        iForBetLinks.put("germany", "https://www.iforbet.pl/oferta/8/29975");
-        iForBetLinks.put("italy", "https://www.iforbet.pl/oferta/8/122");
-        iForBetLinks.put("england", "https://www.iforbet.pl/oferta/8/199");
-        iForBetLinks.put("spain", "https://www.iforbet.pl/oferta/8/159");
-        iForBetLinks.put("france", "https://www.iforbet.pl/oferta/8/29958");
-        iForBetLinks.put("netherlands", "https://www.iforbet.pl/oferta/8/29968");
-        iForBetLinks.put("portugal", "https://www.iforbet.pl/oferta/8/555");
-        iForBetLinks.put("turkey", "https://www.iforbet.pl/oferta/8/29972");
-        iForBetLinks.put("russia", "https://www.iforbet.pl/oferta/8/29897");
-        iForBetLinks.put("belgium", "https://www.iforbet.pl/oferta/8/29861");
+        iForBetLinks.put("Poland", "https://www.iforbet.pl/zaklady-bukmacherskie/320/29994");
+        iForBetLinks.put("germany", "https://www.iforbet.pl/zaklady-bukmacherskie/141/29975");
+        iForBetLinks.put("italy", "https://www.iforbet.pl/zaklady-bukmacherskie/118/122");
+        iForBetLinks.put("england", "https://www.iforbet.pl/zaklady-bukmacherskie/155/199");
+        iForBetLinks.put("spain", "https://www.iforbet.pl/zaklady-bukmacherskie/156/159");
+        iForBetLinks.put("france", "https://www.iforbet.pl/zaklady-bukmacherskie/165/29958");
+        iForBetLinks.put("netherlands", "https://www.iforbet.pl/zaklady-bukmacherskie/157/29968");
+        iForBetLinks.put("portugal", "https://www.iforbet.pl/zaklady-bukmacherskie/554/555");
+        iForBetLinks.put("turkey", "https://www.iforbet.pl/zaklady-bukmacherskie/119/29972");
+        iForBetLinks.put("russia", "https://www.iforbet.pl/zaklady-bukmacherskie/116/29897");
+        iForBetLinks.put("belgium", "https://www.iforbet.pl/zaklady-bukmacherskie/365/29861");
 
 
         lvBetLinks.put("Poland", "https://lvbet.pl/pl/zaklady-bukmacherskie/multiple--?leagues=392");
