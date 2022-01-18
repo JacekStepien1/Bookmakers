@@ -31,7 +31,7 @@ public class StartApp {
 
     @PostConstruct
     public void init() throws Exception {
-        teamGenerator.teamsGenerator();
+//        teamGenerator.teamsGenerator();
         dataService.createLinks();
 //		thread.threadStart1();
     }
