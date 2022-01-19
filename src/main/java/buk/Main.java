@@ -65,7 +65,7 @@ public class Main {
         driver = mainService.driver();
         webReaderSts.matchesReader();
         webReaderBetClic.matchesReader();
-        webReaderIForBet.matchesReader();
+        webReaderIForBet.matchesReader(driver);
         webReaderFortuna.matchesReader(driver);
         webReaderLvBet.matchesReader(driver);
         webReaderEwinner.matchesReader(driver);

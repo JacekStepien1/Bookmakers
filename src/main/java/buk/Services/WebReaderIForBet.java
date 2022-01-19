@@ -2,12 +2,12 @@ package buk.Services;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.regex.Pattern;
 
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,208 +37,158 @@ public class WebReaderIForBet {
     MainService mainService;
 
 
-    String strOdds;
-    String yearStr;
-    String buk = "IForBet";
+    String dateStr;
+    String bukName = "IForBet";
+    List<Date> dateList = new ArrayList<>();
+    TreeMap<Integer, String> league;
+    Matches match[];
+    double oddsTable[] = new double[3];
+    Odds odds[];
     Date matchDate;
     Date oddsDate;
-    double oddsTable[] = new double[3];
-    int value;
-    int numberOfCol;
-    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyyHH:mm");
-    Document doc;
-    Elements col3;
+    int numberOfMatches;
+    SimpleDateFormat sdf = new SimpleDateFormat("EEEMMMddyyyyHH:mm:ss", Locale.ENGLISH);
+    Date dateTemp;
+    WebDriver driver;
 
-    public void matchesReader() throws Exception {
+    public void matchesReader(WebDriver driver) throws Exception {
+        this.driver = driver;
         for (Map.Entry<String, TreeMap> link : dataService.iForBet().entrySet()) {
             matchesReaderStart(link.getKey(), link.getValue());
         }
     }
 
-    public void matchesReaderStart(String url, Map league) throws Exception {
-        numberOfCol = 0;
+    public void matchesReaderStart(String url, TreeMap<Integer, String> league) {
+        this.league = league;
         try {
-            Thread.sleep(mainService.randomNumber2());
-            doc = Jsoup.parse(url, "UTF-8");
-            numberOfCol = 0;
-            Connection connection = Jsoup.connect(url);
-            connection.userAgent("Mozilla");
-            connection.timeout(10000);
-            Document doc = connection.get();
-            col3 = doc.select(".events-group");
-            numberOfCol = col3.size();
+            Thread.sleep(mainService.randomNumber());
+            dateTemp = new Date();
+            driver.get(url);
+            waitUntill();
+            List<WebElement> allMatches = driver.findElements(By.xpath("//section[@class='mb-6']//section/div[contains(@class, 'items-center')]"));
+            numberOfMatches = allMatches.size();
+            // max 16 matches to read
+            if (numberOfMatches>16)
+                numberOfMatches=16;
+            getDates();
+            getMatches();
+            getOdds();
+            saveMatchAndOdds();
         } catch (Exception e) {
-            System.err.println("read error: " + url);
+            System.err.println("xpath or url not found.......");
+            mainService.errorReport(bukName, dateTemp, "xpath or url err");
         }
+        league.clear();
+        dateList.clear();
 
-        String monthNames[] = new String[]{
-                "stycznia",
-                "lutego",
-                "marca",
-                "kwietnia",
-                "maja",
-                "czerwca",
-                "lipca",
-                "sierpnia",
-                "września",
-                "października",
-                "listopada",
-                "grudnia"};
+    }
 
-        String dateDayAndMonth;
-        String dateDay;
-        String dateMonthNumber = null;
-        String dateMonth;
-        String dateTime;
-
+    public void waitUntill() {
         try {
-            for (int i = 0; i < col3.size(); i++) {
+            WebDriverWait wait = new WebDriverWait(driver, 15);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//section[@class='mb-6']//section/div[contains(@class, 'items-center')]")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-                //get data
-                dateDayAndMonth = col3.get(i).select(".event-start").text();
-                dateDayAndMonth = dateDayAndMonth.substring(6);
-                dateDay = dateDayAndMonth.replaceAll("[^0123456789]", "");
-                String dateSplit[] = dateDayAndMonth.split(" ");
-                dateMonth = dateSplit[2];
-                for (int y = 0; y < 12; y++) {
-                    if (monthNames[y].equals(dateMonth))
-                        dateMonthNumber = String.valueOf(y + 1);
-                }
+    public void getOdds() {
+        odds = new Odds[numberOfMatches];
 
-                //get year
-                Date getYear = new Date();
-                int year = getYear.getYear() + 1900;
-                yearStr = String.valueOf(year);
+        for (int i = 0; i < numberOfMatches; i++) {
+            odds[i] = new Odds();
+            oddsDate = new Date();
+            oddsTable[0] = 0;
+            oddsTable[1] = 0;
+            oddsTable[2] = 0;
+            try {
+                oddsTable[0] = Double.parseDouble(driver.findElement(By.xpath("(//section[@class='mb-6']//section//div[contains(@class, 'mr-14')])[" + (i + 1) + "]//div[1]/button[1]")).getText());
+                oddsTable[1] = Double.parseDouble(driver.findElement(By.xpath("(//section[@class='mb-6']//section//div[contains(@class, 'mr-14')])[" + (i + 1) + "]//div[1]/button[2]")).getText());
+                oddsTable[2] = Double.parseDouble(driver.findElement(By.xpath("(//section[@class='mb-6']//section//div[contains(@class, 'mr-14')])[" + (i + 1) + "]//div[1]/button[3]")).getText());
 
+            } catch (Exception e) {
+                System.err.println("get odds error");
+                mainService.errorReport(bukName, dateTemp, "getOdds");
+            }
+            if (oddsTable[0] + oddsTable[1] + oddsTable[2] > 7.5) {
+                odds[i].setHome(oddsTable[0]);
+                odds[i].setDraw(oddsTable[1]);
+                odds[i].setAway(oddsTable[2]);
+                odds[i].setDateTime(oddsDate);
+                odds[i].setBuk(bukName);
+            } else
+                odds[i] = null;
+        }
+    }
 
-                Elements elem = col3.get(i).select(".event-rate");
-                Elements elem5 = col3.get(i).select(".event-time");
-                int n1 = 0;
-                int n2 = 0;
-                String home;
-                String away;
-
-                for (int y = 0; y < elem.size(); y += 3) {
-
-                    try {
-                        //get event time
-                        dateTime = elem5.get(n2).text();
-                        n2++;
-
-                        //set date and time
-                        matchDate = null;
-                        matchDate = sdf.parse(dateDay + "." + dateMonthNumber + "." + yearStr + dateTime);
-
-                        //get odds and teams
-                        double oddsTable[] = new double[3];
-
-                        home = elem.get(n1).selectFirst("span").text();
-                        strOdds = elem.get(n1).select(".rate-value").text();
-                        oddsTable[0] = Double.parseDouble(strOdds);
-                        n1++;
-                        strOdds = elem.get(n1).select(".rate-value").text();
-                        oddsTable[1] = Double.parseDouble(strOdds);
-                        n1++;
-                        away = elem.get(n1).selectFirst("span").text();
-                        strOdds = elem.get(n1).select(".rate-value").text();
-                        oddsTable[2] = Double.parseDouble(strOdds);
-                        n1++;
-
-
-                        Matches match = new Matches();
-
-                        // teams comparison, save match
-                        List<Teams> matchesList = new ArrayList<Teams>();
-
-                        Iterator<Integer> iterator = league.keySet().iterator();
-                        value = iterator.next();
-
-                        for (int z = value; z <= league.size() + value; z++) {
-                            if (home.equals(league.get(z))) {
-                                Teams tl = tlRep.findOne((long) z);
-                                match.setHome(tl.getTeam());
-                                matchesList.add(tl);
-                            }
-                            if (away.equals(league.get(z))) {
-                                Teams tl = tlRep.findOne((long) z);
-                                match.setAway(tl.getTeam());
-                                matchesList.add(tl);
-                            }
-                        }
-
-                        if (match.getHome() == null || match.getAway() == null) {
-                            for (Map.Entry<Integer, String> excep : iForBetTeams.iForBetTeamsExceptions().entrySet()) {
-                                if (home.equals(excep.getValue())) {
-                                    Teams tl = tlRep.findOne((long) excep.getKey());
-                                    match.setHome(tl.getTeam());
-                                    matchesList.add(tl);
-                                }
-                                if (away.equals(excep.getValue())) {
-                                    Teams tl = tlRep.findOne((long) excep.getKey());
-                                    match.setAway(tl.getTeam());
-                                    matchesList.add(tl);
-                                }
-                            }
-                        }
-
-                        match.setTeams(matchesList);
-
-                        try {
-                            match.setDateTime(matchDate);
-                        } catch (Exception e) {
-                            System.err.println("date error");
-                        }
-
-                        Matches m = matchesRep.findFirstByDateTimeAndHome(match.getDateTime(), match.getHome());
-                        Odds od = new Odds();
-                        oddsDate = new Date();
-
-                        if (m == null) {
-
-                            // get odds
-
-                            od = null;
-                            if (oddsTable[0] + oddsTable[1] + oddsTable[2] > 7.5) {
-                                try {
-                                    od = new Odds();
-                                    od.setHome(oddsTable[0]);
-                                    od.setDraw(oddsTable[1]);
-                                    od.setAway(oddsTable[2]);
-                                    od.setDateTime(oddsDate);
-                                    od.setBuk(buk);
-                                    od.setMatch(match);
-                                    match.setFirstAppeared(buk);
-                                    if (match.getDateTime() != null && match.getHome() != null && match.getAway() != null && mainService.compareDates(match)) {
-                                        matchesRep.save(match);
-                                        oddsRep.save(od);
-                                    }
-                                } catch (Exception e) {
-                                    System.err.println("odds error");
-                                }
-                            }
-                        } else {
-                            Long l = m.getId();
-                            if (oddsTable[0] + oddsTable[1] + oddsTable[2] > 7.5) {
-                                try {
-                                    od.setHome(oddsTable[0]);
-                                    od.setDraw(oddsTable[1]);
-                                    od.setAway(oddsTable[2]);
-                                    od.setMatch(matchesRep.findOne(l));
-                                    od.setDateTime(oddsDate);
-                                    od.setBuk(buk);
-                                    oddsRep.save(od);
-                                } catch (Exception e) {
-                                    System.err.println("odds error");
-                                }
-                            }
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
+    public void saveMatchAndOdds() {
+        for (int i = 0; i < numberOfMatches; i++) {
+            if (match[i].getDateTime() != null && match[i].getHome() != null && match[i].getAway() != null && odds[i] != null && mainService.compareDates(match[i])) {
+                Matches m = matchesRep.findFirstByHomeAndAwayAndDateTimeBetween(match[i].getHome(), match[i].getAway(), mainService.date1(match[i]), mainService.date2(match[i]));
+                if (m != null && odds[i] != null) {
+                    odds[i].setMatch(m);
+                    oddsRep.save(odds[i]);
+                } else {
+                    if (match[i].getDateTime() != null && match[i].getHome() != null && match[i].getAway() != null && odds[i] != null && mainService.compareDates(match[i])) {
+                        match[i].setFirstAppeared(bukName);
+                        matchesRep.save(match[i]);
+                        odds[i].setMatch(match[i]);
+                        oddsRep.save(odds[i]);
                     }
                 }
             }
-        } catch (Exception e) {
-            System.err.println("iforbet err");
         }
     }
+
+    public void getMatches() {
+        match = new Matches[numberOfMatches];
+        for (int i = 0; i < numberOfMatches; i++) {
+            match[i] = new Matches();
+            String gethomeAway="";
+            String[] homeAway = new String[2];
+            try {
+                gethomeAway = driver.findElement(By.xpath("(//section[1]//header[contains(@class, 'text-13')])[" + (i + 1) + "]")).getText();
+                homeAway = gethomeAway.split(" - ");
+            } catch (Exception e) {
+                System.err.println("home, away error");
+                mainService.errorReport(bukName, dateTemp, "home, away error");
+            }
+            getTeamFromDataBase(homeAway[0], homeAway[1], match[i]);
+            match[i].setDateTime(dateList.get(i));
+        }
+    }
+
+    public void getTeamFromDataBase(String home, String away, Matches match) {
+        List<Teams> matchesList = new ArrayList<Teams>();
+        for (int z = league.firstKey(); z < league.firstKey() + league.size(); z++) {
+            if (home.equalsIgnoreCase(league.get(z))) {
+                Teams tl = tlRep.findOne((long) z);
+                match.setHome(tl.getTeam());
+                matchesList.add(tl);
+            }
+            if (away.equalsIgnoreCase(league.get(z))) {
+                Teams tl = tlRep.findOne((long) z);
+                match.setAway(tl.getTeam());
+                matchesList.add(tl);
+            }
+        }
+        match.setTeams(matchesList);
+    }
+
+    public void getDates() {
+        for (int i = 0; i < numberOfMatches; i++) {
+            matchDate = null;
+            String dateSplit [];
+            try {
+                dateStr = driver.findElement(By.xpath("(//section/div[contains(@class, 'items-center')]//time)[" + (i + 1) + "]")).getAttribute("datetime");
+                dateSplit=dateStr.split(" ");
+                matchDate=(sdf.parse(dateSplit[0]+dateSplit[1]+dateSplit[2]+dateSplit[3]+dateSplit[4]));
+            } catch (Exception e) {
+                System.err.println("date error");
+                mainService.errorReport(bukName, dateTemp, "getDates err");
+            }
+            dateList.add(matchDate);
+        }
+    }
+
 }
