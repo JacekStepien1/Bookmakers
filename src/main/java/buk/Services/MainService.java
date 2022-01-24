@@ -67,6 +67,16 @@ public class MainService {
         return b;
     }
 
+    // until how many days ahead should read (amount=?)
+    public boolean compareDatesShortTime(Matches match) {
+        boolean b;
+        calCompare = Calendar.getInstance();
+        calCompare.add(Calendar.DAY_OF_MONTH, 5);
+        calb.setTime(match.getDateTime());
+        b = calb.before(calCompare);
+        return b;
+    }
+
     //match date Between date 1 and date 2
     public Date date1(Matches match) {
         calb.setTime(match.getDateTime());

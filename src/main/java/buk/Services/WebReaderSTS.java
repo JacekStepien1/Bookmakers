@@ -118,7 +118,7 @@ public class WebReaderSTS {
                     break;
                 }
 
-                Matches m = matchesRep.findFirstByDateTimeAndHome(match.getDateTime(), match.getHome());
+                Matches m = matchesRep.findFirstByHomeAndAwayAndDateTimeBetween(match.getHome(), match.getAway(), mainService.date1(match), mainService.date2(match));
                 Odds od = null;
                 String odds;
                 oddsDate = new Date();
@@ -145,7 +145,7 @@ public class WebReaderSTS {
                         od.setBuk(buk);
                         od.setMatch(match);
                         match.setFirstAppeared(buk);
-                        if (match.getDateTime() != null && match.getHome() != null && match.getAway() != null && mainService.compareDates(match)) {
+                        if (match.getDateTime() != null && match.getHome() != null && match.getAway() != null && mainService.compareDatesShortTime(match)) {
                             matchesRep.save(match);
                             oddsRep.save(od);
                         }

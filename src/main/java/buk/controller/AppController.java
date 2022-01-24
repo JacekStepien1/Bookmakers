@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mobile.device.Device;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +24,7 @@ import buk.repositories.OddsRepository;
 
 @Controller
 public class AppController {
-	
+
 	@Autowired
 	MatchesRepository matchRep;
 	@Autowired
@@ -34,13 +35,15 @@ public class AppController {
 	OddsRepository oddsRep;
 	@Autowired
 	DataService dataService;
-	
-//	String [] bukListString = new String [] {"BetClic", "Betfan", "BetX", "Etoto", "Ewinner", "Fortuna", "IForBet", "LvBet", "NobleBet", "PZBuk", "STS", "SuperBet", "Totalbet", "Totolotek"};
+
+
+
+	//	String [] bukListString = new String [] {"BetClic", "Betfan", "BetX", "Etoto", "Ewinner", "Fortuna", "IForBet", "LvBet", "NobleBet", "PZBuk", "STS", "SuperBet", "Totalbet", "Totolotek"};
 	String [] bukListString = new String [] {"BetClic", "Betfan", "BetX", "Etoto", "Ewinner", "Fortuna", "IForBet", "LvBet", "NobleBet", "PZBuk", "STS", "SuperBet", "Totalbet"};
 	List <String> bukLinks;
 
 	@RequestMapping("/index/{leauge}")
-	public String index (@PathVariable(name="leauge") String leauge, Model model)  {
+	public String index (@PathVariable(name="leauge") String leauge, Model model, Device device)  {
 		List<Country> countryList = countryRep.findAll();
 		String leagueName = countryRep.league(leauge);
 		Date date = new Date();
@@ -53,10 +56,10 @@ public class AppController {
 			oddsList = new ArrayList<>();
 			for (int y=0; y<bukListString.length; y++) {
 				Odds odds = oddsRep.findFirstByBukAndMatchIdOrderByDateTimeDesc(bukListString[y], m.get(i).getId());
-				if (odds==null) 
+				if (odds==null)
 					odds = new Odds();
 				oddsList.add(odds);
-				}
+			}
 			m.get(i).setOdds(oddsList);
 		}
 		List <Odds> highestOdds = new ArrayList<>();
@@ -65,12 +68,12 @@ public class AppController {
 			double dDraw=0;
 			double dAway=0;
 			for (int y=0; y<m.get(i).getOdds().size(); y++) {
-			if (dHome<m.get(i).getOdds().get(y).getHome())
-				dHome = m.get(i).getOdds().get(y).getHome();
-			if (dDraw<m.get(i).getOdds().get(y).getDraw())
-				dDraw = m.get(i).getOdds().get(y).getDraw();
-			if (dAway<m.get(i).getOdds().get(y).getAway())
-				dAway = m.get(i).getOdds().get(y).getAway();
+				if (dHome<m.get(i).getOdds().get(y).getHome())
+					dHome = m.get(i).getOdds().get(y).getHome();
+				if (dDraw<m.get(i).getOdds().get(y).getDraw())
+					dDraw = m.get(i).getOdds().get(y).getDraw();
+				if (dAway<m.get(i).getOdds().get(y).getAway())
+					dAway = m.get(i).getOdds().get(y).getAway();
 			}
 			Odds odd=new Odds();
 			odd.setHome(dHome);
@@ -147,11 +150,18 @@ public class AppController {
 		model.addAttribute("highestOdds", highestOdds);
 		model.addAttribute("country", countryList);
 		model.addAttribute("leagueName", leagueName);
-		return "index";
+		if (device.isMobile())
+			return "m.index";
+		if (device.isTablet())
+			return "m.index";
+		if (device.isNormal())
+			return "index";
+		else
+			return "index";
 	}
-	
+
 	@RequestMapping("matchdetails/{id}/{buk}")
-	public String matchdetails(@PathVariable(name="id") Long id, @PathVariable(name="buk") String buk, Model model) {
+	public String matchdetails(@PathVariable(name="id") Long id, @PathVariable(name="buk") String buk, Model model, Device device) {
 		Matches matches = matchRep.findOne(id);
 		List <Odds> oddsListDesc = oddsRep.findByMatchIdAndBukOrderByDateTimeDesc(id, buk);
 		model.addAttribute("country", matches.getTeams().get(0).getCountry().getCountry());
@@ -159,9 +169,16 @@ public class AppController {
 		model.addAttribute("m", matches);
 		Object [][] ob = dataTable(oddsListDesc);
 		model.addAttribute("ob", ob);
-		return "matchdetails";
+		if (device.isMobile())
+			return "mobilematchdetails";
+		if (device.isTablet())
+			return "mobilematchdetails";
+		if (device.isNormal())
+			return "matchdetails";
+		else
+			return "matchdetails";
 	}
-	
+
 	public Object [][] dataTable (List <Odds> oddsListDesc){
 		List<Odds> oddsList = oddsListDesc.stream()
 				.sorted(Comparator.comparing(Odds::getDateTime))
@@ -179,7 +196,7 @@ public class AppController {
 			sizeDouble2=sizeDouble2+1-sizeDouble2%1;
 		double sizeDouble3 = sizeDouble2;
 		if(oddsList.size()<16)
-		div = oddsList.size()-1;
+			div = oddsList.size()-1;
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM(HH:mm)");
 		Object [][] ob = new Object [div+2][4];
 		ob[0][0] = "Date";
@@ -197,11 +214,11 @@ public class AppController {
 			else
 				size = (int)sizeDouble2;
 
-		ob[i][0] = sdf.format(oddsList.get(size).getDateTime());
-		ob[i][1] = oddsList.get(size).getHome();
-		ob[i][2] = oddsList.get(size).getDraw();
-		ob[i][3] = oddsList.get(size).getAway();
-		sizeDouble2+=sizeDouble3;
+			ob[i][0] = sdf.format(oddsList.get(size).getDateTime());
+			ob[i][1] = oddsList.get(size).getHome();
+			ob[i][2] = oddsList.get(size).getDraw();
+			ob[i][3] = oddsList.get(size).getAway();
+			sizeDouble2+=sizeDouble3;
 		}
 		ob[div+1][0] = sdf.format(oddsList.get(size3).getDateTime());
 		ob[div+1][1] = oddsList.get(size3).getHome();
@@ -249,7 +266,7 @@ public class AppController {
 //	}
 
 	@RequestMapping("")
-	public String main (Model model)  {
+	public String main (Model model, Device device )  {
 		String leauge ="poland";
 		List<Country> countryList = countryRep.findAll();
 		String leagueName = countryRep.league(leauge);
@@ -359,7 +376,14 @@ public class AppController {
 		model.addAttribute("highestOdds", highestOdds);
 		model.addAttribute("country", countryList);
 		model.addAttribute("leagueName", leagueName);
-		return "index";
+		if (device.isMobile())
+			return "m.index";
+		if (device.isTablet())
+			return "m.index";
+		if (device.isNormal())
+			return "index";
+		else
+			return "index";
 	}
 
 
