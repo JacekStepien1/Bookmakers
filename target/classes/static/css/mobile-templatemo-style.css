@@ -1,0 +1,208 @@
+
+
+
+/* left&right column */
+	.container { 
+		width: 100%; 
+		height: 100%;
+		line-height: 14px;
+	}
+
+/* under logo Top 12 */
+	.tm-site-name {
+	    font-size: 15px;
+	}
+
+/* text colour whole left side*/
+.tm-blue-bg a {	color: white; }
+
+/* li * colour left side*/
+.tm-blue-bg {
+	background-color: #006599;
+	color: white;
+
+
+}
+
+.mleft{
+float:left;  width: 45%; background-color: #006599; height: 170px;
+}
+.mright{
+float:right; width: 55%; max-height: 170px; background-color: #006599; overflow-y:scroll;
+}
+
+.league {
+
+	margin-left: 10px;
+	font-size: 14px;
+	text-align: center;
+	white-space: nowrap; 
+}
+
+	.tab {
+	}
+
+.tm-welcome-title {
+	font-size: 21px; 
+	text-align: center;
+}
+.tm-welcome-title2{	
+	font-size: 24px; 
+	text-align: center;
+}
+
+/* NA */
+.tm-main-nav-ul {
+	font-size: 33px;
+
+}
+
+/* logo ball */
+.tm-logo-div {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	}
+
+/* link left side */
+li {
+	font-size: 11px;
+  	list-style-type: none;
+  	white-space: nowrap; 
+
+}
+
+
+
+.grid-container {
+  	font-family: 'Roboto', sans-serif;
+  	margin-left: 10px;
+  	width: 95%;
+  	border-left: 3px solid rgba(29,150,178,1);
+  	border-right: 3px solid rgba(29,150,178,1);
+  	font-size: 15px;
+  	border-collapse: collapse;
+ 	margin-bottom: 27px;
+ 	text-align: center;
+}
+
+
+
+thead {
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    color: white;
+    background-color: rgba(29,150,178,1);
+	height:25px; 
+	font-weight: 500; 
+	border-right: 3px solid rgba(29,150,178,1);
+
+}
+
+tr:nth-child(even) {
+	background-color: rgba(94,93,82,.1);
+}
+th {
+	text-align: center;
+	font-size: 14px;
+	padding: 4px;
+	border: 1px solid rgba(29,150,178,1);
+	height: 25px;
+}
+
+th:nth-child(5) {
+  	font-size: 13px;
+}
+th:nth-child(6) {
+  	font-size: 13px;
+}
+
+/* table col 2,3,4 (1, X, 2) */
+td {
+	font-family: 'Roboto', sans-serif;
+  	font-size: 15px;
+  	font-weight: 300;
+	text-align: center;
+	border: 1px solid rgba(29,150,178,1);
+	padding: 2px;
+	height: 25px;
+	width: 30px;
+}
+
+td:nth-child(1) {
+  	width: 50px;
+  	max-width: 80px;
+}
+
+td:nth-child(2), td:nth-child(3), td:nth-child(4){
+  	width: 60px;
+  	max-width: 100px;
+}
+
+td:nth-child(5) {
+  	font-size: 11px;
+  	width: 65px;
+  	max-width: 65px;
+}
+
+td:nth-child(6) {
+  	font-size: 12px;
+  	width: 50px;
+  	max-width: 50px;
+}
+
+
+
+
+a#one { 
+color: #303030;
+}
+
+a:hover#one{ 
+  color: black;
+  font-size:111%;
+}
+a:visited#one {
+
+}
+
+a:active#one {
+	color: black;
+  	font-size:118%;
+
+}
+
+.highestOdds {
+	color: #383838;
+  	font-weight: 300;
+  	font-size: 15px; 
+  	border: 2px solid red;
+
+  	}
+
+.char {
+		margin-left: 28%;
+
+	}
+
+	.last5 {
+	font-weight: 500;
+}
+
+.last6 {
+font-weight: 500;
+
+
+}
+
+.lastt {
+	line-height: 11px;
+	font-size: 10px;
+	white-space: nowrap; 
+	overflow-y: hidden;
+}
+.tab{
+	margin-left: 15px;
+	margin-right: 15px;
+}
+
+
