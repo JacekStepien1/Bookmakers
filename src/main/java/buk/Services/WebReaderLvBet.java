@@ -146,7 +146,7 @@ public class WebReaderLvBet {
                 odds[i].setMatch(m);
                 oddsRep.save(odds[i]);
             } else {
-                if (match[i].getDateTime() != null && match[i].getHome() != null && match[i].getAway() != null && odds[i] != null && mainService.compareDates(match[i])) {
+                if (match[i].getDateTime() != null && match[i].getHome() != null && match[i].getAway() != null && odds[i] != null && mainService.compareDatesShortTime(match[i])) {
                     match[i].setFirstAppeared(bukName);
                     matchesRep.save(match[i]);
                     odds[i].setMatch(match[i]);
