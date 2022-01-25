@@ -61,7 +61,7 @@ public class MainService {
     public boolean compareDates(Matches match) {
         boolean b;
         calCompare = Calendar.getInstance();
-        calCompare.add(Calendar.DAY_OF_MONTH, 60);
+        calCompare.add(Calendar.DAY_OF_MONTH, 10);
         calb.setTime(match.getDateTime());
         b = calb.before(calCompare);
         return b;
