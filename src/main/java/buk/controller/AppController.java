@@ -267,7 +267,7 @@ public class AppController {
 
 	@RequestMapping("")
 	public String main (Model model, Device device )  {
-		String leauge ="poland";
+		String leauge ="Poland";
 		List<Country> countryList = countryRep.findAll();
 		String leagueName = countryRep.league(leauge);
 		Date date = new Date();
