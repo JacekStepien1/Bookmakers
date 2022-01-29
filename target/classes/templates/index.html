@@ -5,33 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <meta name="description" content="Najnowsze kursy polskich bukmacherów! Top 12 europejskich lig piłki nożnej. The latest odds of Polish bookmakers! Top 12 European Football Leagues."/>
-    <meta name="keywords" content="bukmacherzy, kursy, bukacherskie, polscy, promocje, typy, najnowsi, najlepsze, 2022, 2023, pilka nozna, polska, obstawianie, najlepsze, bookmakers, polish, betting, tips, odds, best, promotion, 2022, 2023"/>
+    <meta name="keywords" content="kursy, bukmacherskie, polscy, bukmacherzy, promocje, typy, najnowsi, najlepsze, najnowsze, 2022, 2023, pilka nozna, liga, polska, obstawianie, bookmakers, polish, betting, tips, odds, best, promotion, 2022, 2023"/>
     <meta name="author" content="Jacek Stepien"/>
     <meta name="msvalidate.01" content="BB163AC84C334B471C1E1AB15988ED80" />
-    <title>Top 12 European Football Leagues</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400"/>  	<!-- Google web font "Open Sans" -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css"/>                                    	<!-- Bootstrap style -->
-    <link rel="stylesheet" href="/css/magnific-popup.css"/>                             		<!-- Magnific pop up style, http://dimsemenov.com/plugins/magnific-popup/ -->
-    <link rel="stylesheet" href="/css/templatemo-style.css"/>                                 	<!-- Templatemo style -->
+    <title>Kursy Bukmacherskie z Polskich Bukmacherów</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/magnific-popup.css"/>
+    <link rel="stylesheet" href="/css/templatemo-style.css"/>
+    <link rel="canonical" href="https://kursy-bukmacherskie.com"/>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
     <body>        
         <div class="container">
             <div class="row">
-                <div class="tm-left-right-container">                       
-<!-- Left column: logo and menu -->
+                <div class="tm-left-right-container">
                     <div class="tm-blue-bg tm-left-column">                        
                         <div class="tm-logo-div text-xs-center">
                             <img src="/img/ball.jpg" alt="Logo"/>
                             <h1 class="tm-site-name">Top 12 European Football Leagues:</h1>
-                        </div>              
-<!--   Country & League & Left Side   -->      
+                        </div>
 						<a class="league" th:each="country, z : ${country}" id="menu"  th:href="@{'/index/'+${country.getCountry()}}" th:utext="${country.getLeagueName()}+ '&lt;br /&gt;'"></a>
-<!--   League Name Between Country and Matches   -->  			
 						<nav class="tm-main-nav">
                             	<li class="tm-nav-item"> <a href="#match0" class="tm-nav-item-link" th:text="${leagueName}"></a></li>     
-						</nav>                          	
-<!--   Matches (Left Side) -->
+						</nav>
 						<nav class="tm-main-nav">
                             <ul class="tm-main-nav-ul">
                             	<li id="matches" th:each="m, iterStat : ${matches}"> 
@@ -41,44 +38,36 @@
                             </ul>
                         </nav>                                         
                     </div>
-<!-- Right column: content -->
                     <div class="tm-right-column">
                     <section th:id="'match0'" class="tm-section">
                         <figure>
                             <img src="/img/boisko2.png" alt="Header image" class="img-fluid"/>    
                         </figure>
-					</section>   					
-<!--  League Name -->
+					</section>
 					<div class="tm-content-div">
                     	<header>
 							<h2 class="tm-blue-text tm-welcome-title2 top" th:text="${leagueName}"></h2><br></br>  
-						</header>          
-<!--  Table Start-->   
+						</header>
            				<table class="grid-container" th:each="m, iterStat : ${matches}">
            				<a th:if="${iterStat.index} != 0"><br></br></a>
 							<tbody>
-<!-- Section Of Each Table -->
 								<tr th:each="m, iterStat : ${matches}"></tr>
-								<section class="tm-section" th:id="'match'+${iterStat.index}">						
-<!-- Match Over The Table -->		                   
+								<section class="tm-section" th:id="'match'+${iterStat.index}">
                                 	<header>
                                     	<h2 class="tm-blue-text tm-welcome-title tm-margin-b-15" th:utext="  ${m.home} + ' - ' + ${m.away}"></h2> 
                                 	</header>                   
-                     			</section>		 
-<!-- Table Head - Match + Date -->
+                     			</section>
 								<thead>
 									<tr>
 										<td colspan="6" scope="col" style="height:50px; font-size: 18px; font-weight: 500; color: white; border-right: 3px solid rgba(29,150,178,1);" th:utext="${m.home} + ' - ' + ${m.away} + ' - ' + ${leagueName} + '&lt;br /&gt;' +  ${#dates.format(m.dateTime, 'dd.MM.YYYY')}  + ' - ' +  ${#dates.format(m.dateTime, 'HH:mm')}"></td>
 									</tr>
-								</thead>						
-<!-- Table Head 1 X 2 -->
+								</thead>
 								<th>Bookmakers</th>
 								<th>1</th>
 								<th>X</th>
 								<th>2</th>
 								<th>reading time</th>
-								<th>odds history</th>															
-<!-- Table Cells -->							
+								<th>odds history</th>
 								<tr th:each="bukList, bukStat : ${bukList}">
 									<td><a id="one" target="_blank" th:href="@{${bukLinks.get(bukStat.index)}}" th:text="${bukList}"></a></td>
 									<td class="highestOdds" th:if="${m.odds.get(bukStat.index).home} == ${highestOdds.get(iterStat.index).home}" th:text="${m.odds.get(bukStat.index).home}"></td>
@@ -91,8 +80,7 @@
 									<td th:if="${m.odds.get(bukStat.index).away} != 0.00" id="check"> <a id="check" th:href="@{'/matchdetails/' + ${m.id} + '/' +  ${bukList}}">check</a></td>
 									<td th:if="${m.odds.get(bukStat.index).away} == 0.00" id="check"> <a></a></td>	
 								</tr>										
-							</tbody>									
-<!--  Table Foot -->
+							</tbody>
 							<tfoot>
 								<tr>
 									<td colspan="6" style="border: 3px solid rgba(29,150,178,1); border-top: 1px solid rgba(29,150,178,1);" th:utext="' The best odds for now are' + '&nbsp;&nbsp;' + ${highestOdds.get(iterStat.index).home}+ '&nbsp;&nbsp;' +
@@ -101,7 +89,6 @@
 									</td>
 								</tr>	
 							</tfoot>
-<!--  Right side panel, script, score -->
                             <div class="tm-right-out">
                                 <div class="char">
                                     <p th:id="${iterStat.index}"></p>
@@ -128,16 +115,14 @@
                                 </div>
                             </div>
 						</table>
-<!--  Bottom of Page -->						
 						<footer>
                                 <p class="tm-copyright-p">&copy; <span class="tm-current-year">2022</span> | Designed by Jacek Stępień. <span style="font-size:14px;">&nbsp;&nbsp;e-mail: jacek2233@gmail.com</span></p>
 						</footer>
                     </div>  
 				</div>
 			</div>
-		</div> <!-- row -->
-	</div> <!-- container -->              
-<!-- load JS files -->
+		</div>
+	</div>
         <script src="/js/jquery-1.11.3.min.js"></script>             <!-- jQuery (https://jquery.com/download/) -->
         <script src="/js/jquery.magnific-popup.min.js"></script>     <!-- Magnific pop-up (http://dimsemenov.com/plugins/magnific-popup/) -->
         <script src="/js/jquery.singlePageNav.min.js"></script>      <!-- Single Page Nav (https://github.com/ChrisWojcik/single-page-nav) -->

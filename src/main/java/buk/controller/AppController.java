@@ -1,5 +1,9 @@
 package buk.controller;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -9,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.Device;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,6 +26,9 @@ import buk.repositories.CountryRepository;
 import buk.repositories.MatchesRepository;
 import buk.repositories.TeamsRepository;
 import buk.repositories.OddsRepository;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class AppController {
@@ -384,6 +392,42 @@ public class AppController {
 			return "index";
 		else
 			return "index";
+	}
+
+	@GetMapping(value = "/sitemaptop12.xml")
+	public void serveSiteMapFile(HttpServletResponse response) throws IOException {
+
+		response.setContentType("application/xml");
+		try (BufferedReader bufferedReader =
+					 new BufferedReader(new FileReader(new File("/root/drivers/sitemaps/sitemaptop12.xml")))) {
+			String line;
+			StringBuilder siteMapBuilder = new StringBuilder();
+			while ((line = bufferedReader.readLine()) != null) {
+				siteMapBuilder.append(line);
+			}
+			ServletOutputStream outStream = response.getOutputStream();
+			outStream.println(siteMapBuilder.toString());
+			outStream.flush();
+			outStream.close();
+		}
+	}
+
+	@GetMapping(value = "/sitemapkursy.xml")
+	public void serveSiteMapFile2(HttpServletResponse response) throws IOException {
+
+		response.setContentType("application/xml");
+		try (BufferedReader bufferedReader =
+					 new BufferedReader(new FileReader(new File("/root/drivers/sitemaps/sitemapkursy.xml")))) {
+			String line;
+			StringBuilder siteMapBuilder = new StringBuilder();
+			while ((line = bufferedReader.readLine()) != null) {
+				siteMapBuilder.append(line);
+			}
+			ServletOutputStream outStream = response.getOutputStream();
+			outStream.println(siteMapBuilder.toString());
+			outStream.flush();
+			outStream.close();
+		}
 	}
 
 
