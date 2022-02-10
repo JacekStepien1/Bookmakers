@@ -75,6 +75,8 @@ public class ScoresReader {
     public void readMatches() {
         for (int i = 0; i < numberOfMatches; i++) {
             try {
+                homeScore = 1000;
+                awayScore = 1000;
                 matchTab1 = matches.get(i).getText().split("\\n");
                 matchTab2 = pattern.split(matchTab1[0]);
                 home = matchTab2[0].trim();
@@ -97,7 +99,7 @@ public class ScoresReader {
                 Matches m = new Matches();
                 getTeamFromDataBase(home, away, m);
                 Matches match = matchesRep.findFirstByHomeAndAwayAndDateTimeBetweenAndScoreHome(m.getHome(), m.getAway(), mainService.dateBetween1(date), mainService.dateBetween2(date), temp);
-                if (match != null) {
+                if (match != null && homeScore!=1000 && awayScore != 1000) {
                     match.setScoreHome(homeScore);
                     match.setScoreAway(awayScore);
                     matchesRep.save(match);

@@ -133,7 +133,7 @@ public class ScoresTeams {
         int setId = teamGenerator.englandPremier;
         String teamList[] = new String [] {"Manchester United", "Manchester City", "Leicester City", "Liverpool", "Tottenham", "Everton", "West Ham United",
                 "Chelsea", "Southampton", "Arsenal", "Aston Villa", "Leeds United", "Crystal Palace", "Wolverhampton Wanderers", "Newcastle United", "Burnley"
-                , "Brighton & Hove Albion", "Norwich", "Watford", "Brentford"};
+                , "Brighton & Hove Albion", "Norwich City", "Watford", "Brentford"};
         insertTeams(teamList, teams, setId);
         return teams;
     }

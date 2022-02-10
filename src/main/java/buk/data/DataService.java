@@ -101,7 +101,7 @@ public class DataService {
         links.put("https://ebetx.pl/pl/sports-betting/offer/pilka-nozna/portugalia/liga-portugal?hours=7200", betXTeams.portugalPrimeiraLiga());
         links.put("https://ebetx.pl/pl/sports-betting/offer/pilka-nozna/turcja/1-liga?hours=7200", betXTeams.turkeySuperLig());
         links.put("https://ebetx.pl/pl/sports-betting/offer/pilka-nozna/rosja/1-liga?hours=7200", betXTeams.russiaPremier());
-        links.put("https://ebetx.pl/pl/sports-betting/offer/pilka-nozna/belgia/belgia-1-liga?hours=7200", betXTeams.belgiumJupiter());
+        links.put("https://ebetx.pl/pl/sports-betting/offer/pilka-nozna/belgia/1-liga?hours=7200", betXTeams.belgiumJupiter());
 
 
         return links;
@@ -348,7 +348,7 @@ public class DataService {
         betXLinks.put("portugal", "https://ebetx.pl/pl/sports-betting/offer/pilka-nozna/portugalia/liga-portugal?hours=7200");
         betXLinks.put("turkey", "https://ebetx.pl/pl/sports-betting/offer/pilka-nozna/turcja/1-liga?hours=7200");
         betXLinks.put("russia", "https://ebetx.pl/pl/sports-betting/offer/pilka-nozna/rosja/1-liga?hours=7200");
-        betXLinks.put("belgium", "https://ebetx.pl/pl/sports-betting/offer/pilka-nozna/belgia/belgia-1-liga?hours=7200");
+        betXLinks.put("belgium", "https://ebetx.pl/pl/sports-betting/offer/pilka-nozna/belgia/1-liga?hours=7200");
 
 
         eTotoLinks.put("Poland", "https://www.etoto.pl/zaklady-bukmacherskie/pilka-nozna/polska/ekstraklasa/666");
