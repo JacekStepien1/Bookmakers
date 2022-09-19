@@ -60,7 +60,8 @@ public class TeamGenerator {
 	public void russiaPremier() {
 		int setId=russiaPremier;
 		String teamList[] = new String [] {"Zenit", "CSKA Moscow", "Spartak Moscow", "Sochi", "Rostov", "Dinamo Moscow", "Krasnodar",
-				"Lokomotiv Moscow", "Rubin Kazan", "Akhmat", "Khimki", "Ural", "Krylya", "Arsenal Tula", "Ufa", "Nizhny Novgorod"};
+				"Lokomotiv Moscow", "Rubin Kazan", "Akhmat", "Khimki", "Ural", "Krylya", "Arsenal Tula", "Ufa", "Nizhny Novgorod"
+		, "Torpedo Moskva", "Fakel", "Orenburg"};
 		for (int i=0; i<teamList.length; i++) {
 			teams.put(setId, teamList[i]);
 			setId++;
@@ -78,7 +79,7 @@ public class TeamGenerator {
 		int setId=turkeySuperLig;
 		String teamList[] = new String [] {"Besiktas", "Fenerbahce", "Galatasaray", "Gaziantep", "Trabzonspor", "Alanyaspor", "Hatayspor",
 				"Karagumruk", "Yeni Malatyaspor", "Antalyaspor", "Goztepe", "Rizespor", "Sivasspor", "Istanbul BFK", "Konyaspor", "Kasimpasa",
-				"Kayserispor", "Adana Demirspor", "Giresunspor", "Altay Izmir"};
+				"Kayserispor", "Adana Demirspor", "Giresunspor", "Altay Izmir", "Ankaragucu", "Umraniyespor", "Istanbulspor AS"};
 		for (int i=0; i<teamList.length; i++) {
 			teams.put(setId, teamList[i]);
 			setId++;
@@ -97,7 +98,7 @@ public class TeamGenerator {
 		int setId=portugalPrimeiraLiga;
 		String teamList[] = new String [] {"Sporting CP", "FC Porto", "Benfica", "Sporting Braga", "Pacos de Ferreira", "Vitoria Guimaraes", "Moreirense",
 				"Maritimo", "Santa Clara", "Estoril Prai", "Tondela", "Portimonense", "Famalicao", "Arouca", "Gil Vicente", "Vizela",
-				"Belenenses", "Boavista"};
+				"Belenenses", "Boavista", "Rio Ave", "Casa Pia", "GD Chaves"};
 		for (int i=0; i<teamList.length; i++) {
 			teams.put(setId, teamList[i]);
 			setId++;
@@ -116,7 +117,7 @@ public class TeamGenerator {
 		int setId=netherlandsEredivisie;
 		String teamList[] = new String [] {"Ajax", "Vitesse", "PSV Eindhoven", "Feyenoord", "AZ Alkmaar", "Groningen", "Twente",
 				"Heerenveen", "Sparta Rotterdam", "Utrecht", "Heracles", "PEC Zwolle", "Fortuna Sittard", "SC Cambuur", "RKC Waalwijk", "Go Ahead Eagles",
-				"Willem II", "Nec Nijmegen"};
+				"Willem II", "Nec Nijmegen", "Emmen", "Volendam", "Excelsior"};
 		for (int i=0; i<teamList.length; i++) {
 			teams.put(setId, teamList[i]);
 			setId++;
@@ -134,7 +135,7 @@ public class TeamGenerator {
 		int setId=franceLigue1;
 		String teamList[] = new String [] {"PSG", "Lille", "Olympique Lyon", "Monaco", "Rennes", "Olympique Marseille", "Lens",
 				"Angers", "Bordeaux", "Metz", "Montpellier", "Brestois", "Nice", "Strasbourg", "Reims", "Saint-Etienne",
-				"Nantes", "Troyes", "Clermont Foot", "Lorient"};
+				"Nantes", "Troyes", "Clermont Foot", "Lorient", "Toulouse", "Ajaccio", "Auxerre"};
 		for (int i=0; i<teamList.length; i++) {
 			teams.put(setId, teamList[i]);
 			setId++;
@@ -152,7 +153,7 @@ public class TeamGenerator {
 		int setId=germanyBundesliga;
 		String teamList[] = new String [] {"Bayern", "RB Lipsk", "Leverkusen", "Dortmund", "Union Berlin", "Wolfsburg", "Frankfurt",
 				"Moenchengladbach", "Freiburg", "Stuttgart", "Augsburg", "Bochum", "Hertha", "Hoffenheim", "Bielefeld", "FC Koeln"
-				, "Mainz", "Greuther Fürth"};
+				, "Mainz", "Greuther Fürth", "Schalke 04", "Werder Brema"};
 		for (int i=0; i<teamList.length; i++) {
 			teams.put(setId, teamList[i]);
 			setId++;
@@ -172,7 +173,7 @@ public class TeamGenerator {
 		int setId=spainLaLiga;
 		String teamList[] = new String [] {"Atletico", "Real Madrid", "Sevilla", "Barcelona", "Villarreal", "Real Sociedad", "Granada",
 				"Real Betis", "Cadiz", "Levante", "Getafe", "Celta Vigo", "Athletic Club", "Valencia", "Espanyol Barcelona", "Mallorka"
-				, "Deportivo Alavas", "Elche", "Osasuna", "Rayo Vallecano"};
+				, "Deportivo Alavas", "Elche", "Osasuna", "Rayo Vallecano", "Girona FC", "Real Valladolid", "Almeria"};
 		for (int i=0; i<teamList.length; i++) {
 			teams.put(setId, teamList[i]);
 			setId++;
@@ -190,7 +191,7 @@ public class TeamGenerator {
 		int setId=italySerieA;
 		String teamList[] = new String [] {"Milan", "Inter", "Roma", "Atalanta", "Napoli", "Juventus", "Lazio",
 				"Sassuolo", "Verona", "Sampdoria", "Empoli", "Fiorentina", "Bologna", "Udinese", "Spezia", "Genoa"
-				, "Cagliari", "Torino", "Venezia", "Salernitana"};
+				, "Cagliari", "Torino", "Venezia", "Salernitana", "Lecce", "Cremonese", "Monza Brianza"};
 		for (int i=0; i<teamList.length; i++) {
 			teams.put(setId, teamList[i]);
 			setId++;
@@ -209,7 +210,7 @@ public class TeamGenerator {
 		int setId=englandPremier;
 		String teamList[] = new String [] {"Manchester Utd", "Manchester City", "Leicester", "Liverpool", "Tottenham", "Everton", "West Ham",
 				"Chelsea", "Southampton", "Arsenal", "Aston Villa", "Leeds", "Crystal Palace", "Wolverhampton", "Newcastle", "Burnley"
-				, "Brighton", "Norwich", "Watford", "Brentford"};
+				, "Brighton", "Norwich", "Watford", "Brentford", "Fulham", "AFC Bournemouth", "Nottingham Forest"};
 		for (int i=0; i<teamList.length; i++) {
 			teams.put(setId, teamList[i]);
 			setId++;
@@ -228,7 +229,7 @@ public class TeamGenerator {
 		int setId=polandEkstraklasa;
 		String teamList[] = new String [] {"Legia Warszawa", "Piast Gliwice", "Lech Poznań", "Śląsk Wrocław", "Cracovia", "Pogoń Szczecin", "Jagiellonia Białystok",
 				"Lechia Gdańsk", "Górnik Zabrze", "Raków Częstochowa", "Zagłębie Lubin", "Wisła Płock", "Wisła Kraków", "Warta", "Mielec", "Radomiak Radom",
-				"Termalica", "Górnik Łęczna"};
+				"Termalica", "Górnik Łęczna", "Miedź Legnica", "Widzew Łódź", "Korona Kielce"};
 		for (int i=0; i<teamList.length; i++) {
 			teams.put(setId, teamList[i]);
 			setId++;
@@ -263,7 +264,7 @@ public class TeamGenerator {
 		int setId=belgiumJupiter;
 		String teamList[] = new String [] {"Union Saint-Gilloise", "Club Brugge", "Anderlecht", "Antwerp", "Gent", "Mechelen", "Charleroi",
 				"Kortrijk", "Genk", "Leuven", "Cercle Brugge", "Eupen", "Sint Truidense", "Oostende", "Standard Liege", "Zulte Waregem",
-				"Seresien", "Beerschot"};
+				"Seresien", "Beerschot", "KVC Westerlo"};
 		for (int i=0; i<teamList.length; i++) {
 			teams.put(setId, teamList[i]);
 			setId++;
